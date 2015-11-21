@@ -2,10 +2,9 @@
 ####UPDATE<br />
 2015-11-11 release a new version 2.0
 
-[http://cw2016.cqut.edu.cn](http://cw2016.cqut.edu.cn)
-[http://cyberworlds-conference.org](cyberworlds-conference.org)
-
-
+[http://cyberworlds-conference.org](cyberworlds-conference.org)<br />
+[http://cw2016.cqut.edu.cn](http://cw2016.cqut.edu.cn)<br />
+![](https://github.com/Jiavan/cyberworlds-conference-2016/blob/master/doc/flyer.jpg)
 
 ---
 ##About Cyberworlds Conference
