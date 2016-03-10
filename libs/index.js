@@ -1,6 +1,57 @@
 /**
  * Created by Jia Van on 2015/11/1.
  */
+
+ /**
+  * create xhr object
+  * @returns {*} xhr obj
+  */
+var xhr = createXHR();
+xhr.onreadystatechange = function () {
+    if (xhr.readState === 4) {
+        if ((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304) {
+            $("#loading").css("display","none");
+            document.getElementById("article").innerHTML=xhr.responseText;
+        } else {
+            throw new Error('request error ' + xhr.status);
+        }
+    }
+};
+
+ function createXHR() {
+     if (typeof XMLHttpRequest != 'undefined') {
+         return new XMLHttpRequest();
+     } else if (typeof ActiveXObject != 'undefined') {
+
+         // before ie7 version
+         if (typeof arguments.callee.activeXString != 'string') {
+             var versions = ['MSXML2.XMLHttp.6.0', 'MSXML2.XMLHttp.3.0',
+                     'MSXML2.XMLHttp'],
+                 i,
+                 len;
+
+             for (i = 0, len = versions.length; i < len; i++) {
+                 try {
+                     new ActiveXObject(versions[i]);
+                     arguments.callee.activeXString = versions[i];
+                     break;
+                 } catch (ex) {
+                     //deal error
+                     console.log(ex.message);
+                 }
+             }
+         }
+
+         return new ActiveXObject(arguments.callee.activeXString);
+     } else {
+         throw new Error('no xhr object available.');
+     }
+ }
+
+/**
+ * hidden div
+ * @param obj click node
+ */
 function hiddenAndLoad(obj){
     $(document).ready(function () {
         loadContent(obj);
@@ -12,41 +63,15 @@ function hiddenAndLoad(obj){
 }
 
 function loadContent(obj){
-    document.getElementById(('article')).innerText = "";
-    $("#loading").css("display","block");
     var title = obj.innerHTML;
-    document.getElementById(('command')).innerText = "Guest@CW2016: cat ~/" + title + " | more";
     var url = "./admin/getContent.php?title=" + title;
-    /*setTimeout(function(){
-        $('#article').load(encodeURI(url), function(){
-            $("#loading").css("display","none");
-        });
-    }, 500);*/
-    setTimeout(function () {
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {
-            xmlhttp=new XMLHttpRequest();
-        } else {
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function() {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-                $("#loading").css("display","none");
-                document.getElementById("article").innerHTML=xmlhttp.responseText;
-            }
-        }
-        xmlhttp.open("GET", url, true);
-        xmlhttp.send();
-    }, 500);
+    xhr.open('get', url, true);
+    xhr.send(null);
 }
 
 $(document).ready(function () {
     var count = 0;
-    $('#article').load('./admin/getContent.php?title=Venue');
-    /**
-     * chongqing sight pic display
-     */
+    $('#article').load('./admin/getContent.php?title=Submission');
     $('#hotel').click(function(){
         count++;
         if(count % 2 == 1) {
@@ -55,7 +80,7 @@ $(document).ready(function () {
             $('#chongqing-sight').animate({opacity: '0'}, 500);
         }
     });
-    
+
     $('#display-overview').click(function () {
         $('#overview').css('display', 'block');
         $('#overview').animate({height: '530px', opacity: '1'}, 800, function(){
@@ -63,9 +88,6 @@ $(document).ready(function () {
         });
     });
 });
-
-
-
 
 function menuFix() {
     var sfEls = document.getElementById("nav").getElementsByTagName("li");

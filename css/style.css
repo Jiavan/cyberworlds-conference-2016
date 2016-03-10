@@ -181,7 +181,7 @@ body{
 	position: relative;
 }
 .footer{
-    width: 75%;
+    width: 85%;
     padding-top: 1px;
     margin:100px auto auto auto;
 }
@@ -190,9 +190,9 @@ body{
     margin: auto;
 }
 .footer .support img{
-    width: 64px;
-    max-height: 64px;
-    margin: auto auto auto 20px;
+    max-width: 150px;
+    max-height: 55px;
+    margin: 20px auto auto 20px;
     vertical-align: middle;
 }
 .footer h5, h6{
