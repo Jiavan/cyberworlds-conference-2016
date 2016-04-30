@@ -1,0 +1,33 @@
+* {
+	padding: 0;
+	margin: 0;
+	border: 0;
+}
+body {
+	background-color: gray;
+}
+.input-box input {
+	width: 200px;
+	height: 30px;
+	border-radius: 4px;
+	margin-top: 10px;
+}
+.input-box span {
+	display: inline-block;
+	width: 100px;
+	text-align: right;
+	margin-right: 20px;
+	background-color: red;
+}
+.form-box {
+	width: 500px;
+	text-align: center;
+	margin: 20px auto 0;
+	background-color: #333;
+}
+.form-box input[type="submit"] {
+	margin-top: 10px;
+	width: 100px;
+	height: 30px;
+	margin-bottom: 20px;
+}
