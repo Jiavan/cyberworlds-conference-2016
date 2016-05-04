@@ -5,6 +5,69 @@
 	<link rel="stylesheet" type="text/css" href="src/css/style.css">
 </head>
 <body>
-<script src="dist/bundle.js"></script>
+<div class="form-box">
+	<form>
+		<input placeholder="username"></input><br />
+		<input placeholder="gender"></input><br />
+		<input placeholder="nationality"></input><br />
+		<input placeholder="nationality"></input><br />
+		<input placeholder="passport"></input><br />
+		<input placeholder="organization"></input><br />
+		<input placeholder="student"></input><br />
+		<input placeholder="member"></input><br />
+		<input placeholder="cost"></input><br />
+		<input placeholder="paper"></input><br />
+		<input placeholder="hotel"></input><br />
+		<input placeholder="tourism"></input><br />
+		<input type="button" value="submit" id="submit" />
+	</form>
+</div>
+<script type="text/javascript">
+	var ajax = function (type, url, data, callback) {
+
+		var xhr = new XMLHttpRequest(), res;
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304)) {
+				res = xhr.responeText;
+				callback.call(this);
+			}
+		};
+
+		xhr.open(type, url, true)
+		if (type.toLowerCase() === 'get') {
+			xhr.send(null);
+		} else if (type.toLowerCase() === 'post') {
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.send(data);
+		}
+	};
+
+	document.addEventListener('DOMContentLoaded', function (event) {
+		var button = document.getElementById('submit');
+		button.addEventListener('click', function (event) {
+			event.preventDefault();
+			var form = document.forms[0], i = 0, data = {}, isOk = true;
+
+			for (; i < form.length; i++) {
+				if (form[i].value.trim() == '') {
+					// null
+					form[i].focus();
+					isOk = false;
+					break;
+				} else {
+					data[form[i].placeholder] = form[i].value;
+				}
+			}
+			
+			if (isOk) {
+				data = JSON.stringify(data);
+				console.log(data);
+				ajax('post', 'register.php', data, function () {
+					alert('success');
+				});
+			}
+		}, false);
+	}, false);
+</script>
 </body>
 </html>

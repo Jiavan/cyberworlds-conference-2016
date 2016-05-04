@@ -4,7 +4,7 @@ var InputComponent = React.createClass({
 		return {content: ''};
 	},
 	handleChange: function (event) {
-		this.setState({content: event.target.value});
+		this.setState({content: event.target.value.substr(0, 40)});
 	},
 	render: function () {
 		return (

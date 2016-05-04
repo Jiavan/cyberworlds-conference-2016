@@ -20101,38 +20101,15 @@
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var React = __webpack_require__(1),
-	    InputComponent = __webpack_require__(169);
+	var React = __webpack_require__(1);
 
 	var FormComponent = React.createClass({ displayName: "FormComponent",
+		componentWillMount: function () {},
 		render: function () {
-			return React.createElement("div", {
-				className: "form-box" }, React.createElement(InputComponent, { name: "Username", placeholder: "jiavan" }), React.createElement(InputComponent, { name: "Username", placeholder: "jiavan" }), React.createElement(InputComponent, { name: "Username", placeholder: "jiavan" }), React.createElement(InputComponent, { name: "Username", placeholder: "jiavan" }), React.createElement("input", { type: "submit", value: "Submit" }));
+			return React.createElement("div", { className: "form-box" }, React.createElement("input", { placeholder: "username" }), React.createElement("br", null), React.createElement("input", { placeholder: "gender" }), React.createElement("br", null), React.createElement("input", { placeholder: "nationality" }), React.createElement("br", null), React.createElement("input", { placeholder: "nationality" }), React.createElement("br", null), React.createElement("input", { placeholder: "passport" }), React.createElement("br", null), React.createElement("input", { placeholder: "organization" }), React.createElement("br", null), React.createElement("input", { placeholder: "student" }), React.createElement("br", null), React.createElement("input", { placeholder: "member" }), React.createElement("br", null), React.createElement("input", { placeholder: "cost" }), React.createElement("br", null), React.createElement("input", { placeholder: "author of the paper" }), React.createElement("br", null), React.createElement("input", { placeholder: "hotel" }), React.createElement("br", null), React.createElement("input", { placeholder: "tourism project" }), React.createElement("br", null), React.createElement("input", { type: "submit", value: "submit" }));
 		}
 	});
 	module.exports = FormComponent;
-
-/***/ },
-/* 169 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var React = __webpack_require__(1);
-	var InputComponent = React.createClass({ displayName: "InputComponent",
-		getInitialState: function () {
-			return { content: '' };
-		},
-		handleChange: function (event) {
-			this.setState({ content: event.target.value });
-		},
-		render: function () {
-			return React.createElement("div", { className: "input-box" }, React.createElement("span", null, this.props.name), React.createElement("input", {
-				placeholder: this.props.placeholder,
-				value: this.state.content,
-				onChange: this.handleChange
-			}));
-		}
-	});
-	module.exports = InputComponent;
 
 /***/ }
 /******/ ]);
