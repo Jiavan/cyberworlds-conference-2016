@@ -5,68 +5,78 @@
 	<link rel="stylesheet" type="text/css" href="src/css/style.css">
 </head>
 <body>
+<div class="info">
+<h1>Welcome to CW2016!</h1>
+<p>Fill in the information on the right and we will send you an e-mail.</p>
+</div>
 <div class="form-box">
-	<form>
-		<input placeholder="username"></input><br />
-		<input placeholder="gender"></input><br />
-		<input placeholder="nationality"></input><br />
-		<input placeholder="nationality"></input><br />
-		<input placeholder="passport"></input><br />
-		<input placeholder="organization"></input><br />
-		<input placeholder="student"></input><br />
-		<input placeholder="member"></input><br />
-		<input placeholder="cost"></input><br />
-		<input placeholder="paper"></input><br />
-		<input placeholder="hotel"></input><br />
-		<input placeholder="tourism"></input><br />
-		<input type="button" value="submit" id="submit" />
+	<form name="info" action="register.php" method="post" enctype="multipart/form-data">
+		<span>Username</span>
+		<input type="text" name="username" placeholder="username"></input>
+		<span>Email</span>
+		<input type="text" name="email" placeholder="email"></input>
+		<span>Gender</span>
+		<select name="gender" value="M">
+			<option value="F">F</option>
+			<option value="M">M</option>
+		</select>
+		<span>Nationality</span>
+		<input type="text" name="nationality" placeholder="nationality"></input>
+		<span>Passport</span>
+		<input type="text" name="passport" placeholder="passport"></input>
+		<span>Member</span>
+		<select name="member">
+			<option value="IEEE">IEEE</option>
+			<option value="ACM">ACM</option>
+			<option value="CCF">CCF</option>
+			<option value="ACM-SIGGRAPH">ACM-SIGGRAPH</option>
+			<option value="Eurographics">Eurographics</option>
+			<option value="IFIP">IFIP</option>
+			<option value="None">None</option>
+		</select>
+		<span>Student</span>
+		<select name="student">
+			<option value="yes">Yes</option>
+			<option value="no">No</option>
+		</select>
+		<span>Organiztion</span>
+		<input type="text" name="organization" placeholder="organization"></input>
+		<span>Cost</span>
+		<input type="text" name="cost" placeholder="cost"></input>
+		<span>Paper</span>
+		<input type="text" name="paper" placeholder="paper"></input>
+		<span>Hotel</span>
+		<input type="text" name="hotel" placeholder="hotel"></input>
+		<span>Tourism</span>
+		<input type="text" name="tourism" placeholder="tourism"></input>
+		<span>File</span>
+		<input type="file" name="file" id="file" />
+		<input type="submit" value="submit" id="submit" />
 	</form>
 </div>
 <script type="text/javascript">
-	var ajax = function (type, url, data, callback) {
-
-		var xhr = new XMLHttpRequest(), res;
-		xhr.onreadystatechange = function () {
-			if (xhr.readyState === 4 && (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304)) {
-				res = xhr.responeText;
-				callback.call(this);
-			}
-		};
-
-		xhr.open(type, url, true)
-		if (type.toLowerCase() === 'get') {
-			xhr.send(null);
-		} else if (type.toLowerCase() === 'post') {
-			xhr.setRequestHeader('Content-Type', 'application/json');
-			xhr.send(data);
-		}
-	};
-
 	document.addEventListener('DOMContentLoaded', function (event) {
 		var button = document.getElementById('submit');
-		button.addEventListener('click', function (event) {
-			event.preventDefault();
-			var form = document.forms[0], i = 0, data = {}, isOk = true;
-
-			for (; i < form.length; i++) {
-				if (form[i].value.trim() == '') {
-					// null
+		var form = document.forms[0], i = 0;
+		button.onclick = function (event) {
+			for (i = 0; i < form.length; i++) {
+				if (form[i].type === 'text' && form[i].value.trim() === '') {
 					form[i].focus();
-					isOk = false;
-					break;
+					form[i].setAttribute('class', 'warning');
+					return false;
 				} else {
-					data[form[i].placeholder] = form[i].value;
+
 				}
 			}
-			
-			if (isOk) {
-				data = JSON.stringify(data);
-				console.log(data);
-				ajax('post', 'register.php', data, function () {
-					alert('success');
-				});
+		}
+
+		for (i = 0; i < form.length; i++) {
+			if (form[i].type === 'text') {
+				form[i].onblur = function (event) {
+					event.target.setAttribute('class', '');
+				}
 			}
-		}, false);
+		}
 	}, false);
 </script>
 </body>
