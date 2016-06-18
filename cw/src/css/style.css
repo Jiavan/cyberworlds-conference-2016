@@ -60,3 +60,7 @@ body {
 .info p {
 	font-size: 18px;
 }
+span.spe {
+	line-height: 22.5px;
+	vertical-align: middle;
+}
